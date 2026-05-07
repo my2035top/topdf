@@ -13,8 +13,10 @@
             line-height: 1.8;
             -webkit-font-smoothing: antialiased;
         }
+        body[dir="rtl"] { direction: rtl; text-align: right; }
         .container { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
         .header { text-align: center; padding: 48px 0 40px; border-bottom: 1px solid #d2d2d7; margin-bottom: 40px; }
+        body[dir="rtl"] .header { text-align: center; }
         .header .icon {
             width: 72px; height: 72px; border-radius: 16px;
             background: linear-gradient(135deg, #2196F3, #64B5F6);
@@ -23,14 +25,19 @@
         .header .icon svg { width: 36px; height: 36px; fill: white; }
         .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
         .header .update-date { font-size: 14px; color: #86868b; }
-        h2 { font-size: 20px; font-weight: 600; margin: 36px 0 16px; color: #1d1d1f; }
         h3 { font-size: 16px; font-weight: 600; margin: 24px 0 12px; color: #1d1d1f; }
         p { margin-bottom: 14px; font-size: 15px; color: #3a3a3c; }
         ul { margin: 0 0 14px 20px; }
+        body[dir="rtl"] ul { margin: 0 20px 14px 0; }
         ul li { font-size: 15px; color: #3a3a3c; margin-bottom: 6px; }
         .highlight-box {
             background: #e8f5e9; border-left: 4px solid #4caf50;
             padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 20px 0;
+        }
+        body[dir="rtl"] .highlight-box {
+            border-left: none;
+            border-right: 4px solid #4caf50;
+            border-radius: 8px 0 0 8px;
         }
         .highlight-box p { margin: 0; color: #2e7d32; font-weight: 500; }
         .section-card {
@@ -40,6 +47,17 @@
         .section-card h3 { margin-top: 0; }
         .section-card p:last-child { margin-bottom: 0; }
         .footer { text-align: center; padding: 32px 0 0; border-top: 1px solid #d2d2d7; margin-top: 48px; font-size: 13px; color: #86868b; }
+        .lang-selector {
+            text-align: center; margin: 20px 0;
+        }
+        .lang-selector select {
+            padding: 8px 16px;
+            border: 1px solid #d2d2d7;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+            cursor: pointer;
+        }
         @media (max-width: 600px) {
             .container { padding: 20px 16px 60px; }
             .header { padding: 32px 0 28px; }
@@ -56,103 +74,545 @@
                     <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
                 </svg>
             </div>
-            <h1>隐私政策</h1>
-            <p class="update-date">最后更新日期：2026年5月8日</p>
+            <h1 id="page-title"></h1>
+            <p class="update-date" id="update-date"></p>
         </div>
 
-        <p>感谢您使用<strong>「多任务计时器」</strong>（以下简称"本应用"）。我们深知隐私对您的重要性，本隐私政策将清晰、透明地说明本应用如何处理您的信息。</p>
-
-        <div class="highlight-box">
-            <p>🔒 核心承诺：本应用不收集、不上传、不分享您的任何个人数据。</p>
+        <div class="lang-selector">
+            <select id="lang-select" onchange="switchLang(this.value)">
+                <option value="zh">简体中文</option>
+                <option value="en">English</option>
+                <option value="ja">日本語</option>
+                <option value="ko">한국어</option>
+                <option value="es">Español</option>
+                <option value="de">Deutsch</option>
+                <option value="fr">Français</option>
+                <option value="ar">العربية</option>
+            </select>
         </div>
 
-        <div class="section-card">
-            <h3>1. 我们收集哪些信息</h3>
-            <p><strong>我们不收集任何信息。</strong></p>
-            <p>本应用没有账号注册系统，没有用户登录功能，不使用任何第三方统计或分析SDK。您在使用本应用时，不需要提供任何个人信息。</p>
-        </div>
-
-        <div class="section-card">
-            <h3>2. 权限使用说明</h3>
-            <p>本应用可能需要访问您设备的部分权限，<strong>仅用于</strong>实现应用的核心功能。</p>
-            <p><strong>我们不会：</strong></p>
-            <ul>
-                <li>将您的数据上传到任何服务器</li>
-                <li>将您的数据分享给任何第三方</li>
-                <li>将您的数据用于核心功能之外的任何目的</li>
-            </ul>
-            <p>所有数据处理均在您的设备本地完成。</p>
-        </div>
-
-        <div class="section-card">
-            <h3>3. 数据存储</h3>
-            <p>本应用产生的数据<strong>仅保存在您的设备本地存储中</strong>。</p>
-            <p>本应用不会读取、扫描、上传或分析您设备上的任何其他文件。</p>
-        </div>
-
-        <div class="section-card">
-            <h3>4. 第三方服务</h3>
-            <p><strong>本应用不使用任何第三方服务。</strong></p>
-            <p>具体来说，本应用不包含：</p>
-            <ul>
-                <li>第三方广告SDK</li>
-                <li>第三方数据分析工具</li>
-                <li>第三方崩溃报告工具</li>
-                <li>第三方社交分享SDK</li>
-                <li>任何形式的用户行为追踪</li>
-            </ul>
-        </div>
-
-        <div class="section-card">
-            <h3>5. 数据存储与安全</h3>
-            <p>由于本应用不收集任何用户数据，因此：</p>
-            <ul>
-                <li>不存在用户数据的服务器存储</li>
-                <li>不存在数据传输过程中的安全风险</li>
-                <li>不存在数据泄露的可能性</li>
-            </ul>
-            <p>您的数据存储在您的设备本地，其安全性由您设备的系统保护。</p>
-        </div>
-
-        <div class="section-card">
-            <h3>6. 儿童隐私</h3>
-            <p>本应用不针对13岁以下儿童设计。由于本应用不收集任何个人信息，我们无法获知用户的年龄。如果家长或监护人发现儿童在使用本应用，无需担心数据收集问题，因为本应用不会收集任何数据。</p>
-        </div>
-
-        <div class="section-card">
-            <h3>7. 您的权利</h3>
-            <p>由于本应用不收集任何个人数据，您自然享有完全的隐私保护：</p>
-            <ul>
-                <li>无需请求数据访问或导出（因为没有数据被收集）</li>
-                <li>无需请求数据删除（因为没有数据被存储）</li>
-                <li>卸载应用将同时清除应用内所有数据</li>
-            </ul>
-        </div>
-
-        <div class="section-card">
-            <h3>8. 隐私政策的变更</h3>
-            <p>如果本隐私政策有任何变更，我们会在本页面更新。由于本应用不收集用户数据，我们无法通过邮件或其他方式通知您，建议您定期查看本页面。</p>
-        </div>
-
-        <div class="section-card">
-            <h3>9. 联系我们</h3>
-            <p>如果您对本隐私政策有任何疑问、意见或建议，请通过以下方式联系我们：</p>
-            <ul>
-                <li>📧 电子邮箱：<strong>3314967083@qq.com</strong></li>
-            </ul>
-            <p>我们会在收到邮件后尽快回复。</p>
-        </div>
-
-        <div class="section-card">
-            <h3>10. 法律适用</h3>
-            <p>本隐私政策受中华人民共和国法律管辖。如本隐私政策的中文版本与其他语言版本存在不一致，以中文版本为准。</p>
-        </div>
+        <div id="content"></div>
 
         <div class="footer">
             <p>© 2026 多任务计时器. All rights reserved.</p>
-            <p>本应用所有功能均在设备本地完成，保护您的隐私是我们的首要原则。</p>
+            <p id="footer-note"></p>
         </div>
-
     </div>
+
+<script>
+const translations = {
+    zh: {
+        pageTitle: "隐私政策",
+        updateDate: "最后更新日期：2026年5月8日",
+        intro: "感谢您使用<strong>「多任务计时器」</strong>（以下简称"本应用"）。我们深知隐私对您的重要性，本隐私政策将清晰、透明地说明本应用如何处理您的信息。",
+        highlight: "🔒 核心承诺：本应用不收集、不上传、不分享您的任何个人数据。",
+        s1_title: "1. 我们收集哪些信息",
+        s1_p1: "<strong>我们不收集任何信息。</strong>",
+        s1_p2: "本应用没有账号注册系统，没有用户登录功能，不使用任何第三方统计或分析SDK。您在使用本应用时，不需要提供任何个人信息。",
+        s2_title: "2. 权限使用说明",
+        s2_p1: "本应用可能需要访问您设备的部分权限，<strong>仅用于</strong>实现应用的核心功能。",
+        s2_p2: "<strong>我们不会：</strong>",
+        s2_li1: "将您的数据上传到任何服务器",
+        s2_li2: "将您的数据分享给任何第三方",
+        s2_li3: "将您的数据用于核心功能之外的任何目的",
+        s2_p3: "所有数据处理均在您的设备本地完成。",
+        s3_title: "3. 数据存储",
+        s3_p1: "本应用产生的数据<strong>仅保存在您的设备本地存储中</strong>。",
+        s3_p2: "本应用不会读取、扫描、上传或分析您设备上的任何其他文件。",
+        s4_title: "4. 第三方服务",
+        s4_p1: "<strong>本应用不使用任何第三方服务。</strong>",
+        s4_p2: "具体来说，本应用不包含：",
+        s4_li1: "第三方广告SDK",
+        s4_li2: "第三方数据分析工具",
+        s4_li3: "第三方崩溃报告工具",
+        s4_li4: "第三方社交分享SDK",
+        s4_li5: "任何形式的用户行为追踪",
+        s5_title: "5. 数据存储与安全",
+        s5_p1: "由于本应用不收集任何用户数据，因此：",
+        s5_li1: "不存在用户数据的服务器存储",
+        s5_li2: "不存在数据传输过程中的安全风险",
+        s5_li3: "不存在数据泄露的可能性",
+        s5_p2: "您的数据存储在您的设备本地，其安全性由您设备的系统保护。",
+        s6_title: "6. 儿童隐私",
+        s6_p1: "本应用不针对13岁以下儿童设计。由于本应用不收集任何个人信息，我们无法获知用户的年龄。如果家长或监护人发现儿童在使用本应用，无需担心数据收集问题，因为本应用不会收集任何数据。",
+        s7_title: "7. 您的权利",
+        s7_p1: "由于本应用不收集任何个人数据，您自然享有完全的隐私保护：",
+        s7_li1: "无需请求数据访问或导出（因为没有数据被收集）",
+        s7_li2: "无需请求数据删除（因为没有数据被存储）",
+        s7_li3: "卸载应用将同时清除应用内所有数据",
+        s8_title: "8. 隐私政策的变更",
+        s8_p1: "如果本隐私政策有任何变更，我们会在本页面更新。由于本应用不收集用户数据，我们无法通过邮件或其他方式通知您，建议您定期查看本页面。",
+        s9_title: "9. 联系我们",
+        s9_p1: "如果您对本隐私政策有任何疑问、意见或建议，请通过以下方式联系我们：",
+        s9_li1: "📧 电子邮箱：<strong>3314967083@qq.com</strong>",
+        s9_p2: "我们会在收到邮件后尽快回复。",
+        s10_title: "10. 法律适用",
+        s10_p1: "本隐私政策受中华人民共和国法律管辖。如本隐私政策的中文版本与其他语言版本存在不一致，以中文版本为准。",
+        footer: "本应用所有功能均在设备本地完成，保护您的隐私是我们的首要原则。"
+    },
+    en: {
+        pageTitle: "Privacy Policy",
+        updateDate: "Last Updated: May 8, 2026",
+        intro: "Thank you for using <strong>Multi-task Timer</strong> (hereinafter referred to as \"this App\"). We deeply value your privacy, and this privacy policy clearly and transparently explains how this App handles your information.",
+        highlight: "🔒 Core Commitment: This App does not collect, upload, or share any of your personal data.",
+        s1_title: "1. What Information We Collect",
+        s1_p1: "<strong>We do not collect any information.</strong>",
+        s1_p2: "This App has no account registration system, no user login feature, and does not use any third-party statistics or analytics SDKs. You do not need to provide any personal information when using this App.",
+        s2_title: "2. Permission Usage",
+        s2_p1: "This App may need to access certain permissions on your device, <strong>solely for</strong> implementing the core features of the App.",
+        s2_p2: "<strong>We will not:</strong>",
+        s2_li1: "Upload your data to any server",
+        s2_li2: "Share your data with any third party",
+        s2_li3: "Use your data for any purpose beyond the core features",
+        s2_p3: "All data processing is done locally on your device.",
+        s3_title: "3. Data Storage",
+        s3_p1: "Data generated by this App is <strong>stored only on your device's local storage</strong>.",
+        s3_p2: "This App will not read, scan, upload, or analyze any other files on your device.",
+        s4_title: "4. Third-Party Services",
+        s4_p1: "<strong>This App does not use any third-party services.</strong>",
+        s4_p2: "Specifically, this App does not contain:",
+        s4_li1: "Third-party advertising SDKs",
+        s4_li2: "Third-party data analytics tools",
+        s4_li3: "Third-party crash reporting tools",
+        s4_li4: "Third-party social sharing SDKs",
+        s4_li5: "Any form of user behavior tracking",
+        s5_title: "5. Data Storage and Security",
+        s5_p1: "Since this App does not collect any user data:",
+        s5_li1: "There is no server storage of user data",
+        s5_li2: "There is no security risk during data transmission",
+        s5_li3: "There is no possibility of data breach",
+        s5_p2: "Your data is stored locally on your device, and its security is protected by your device's system.",
+        s6_title: "6. Children's Privacy",
+        s6_p1: "This App is not designed for children under 13 years of age. Since this App does not collect any personal information, we have no way of knowing users' ages. If parents or guardians find children using this App, there is no need to worry about data collection, as this App does not collect any data.",
+        s7_title: "7. Your Rights",
+        s7_p1: "Since this App does not collect any personal data, you naturally enjoy complete privacy protection:",
+        s7_li1: "No need to request data access or export (because no data is collected)",
+        s7_li2: "No need to request data deletion (because no data is stored)",
+        s7_li3: "Uninstalling the App will clear all data within the App",
+        s8_title: "8. Changes to Privacy Policy",
+        s8_p1: "If there are any changes to this privacy policy, we will update them on this page. Since this App does not collect user data, we cannot notify you via email or other means. We recommend that you check this page regularly.",
+        s9_title: "9. Contact Us",
+        s9_p1: "If you have any questions, comments, or suggestions regarding this privacy policy, please contact us through:",
+        s9_li1: "📧 Email: <strong>3314967083@qq.com</strong>",
+        s9_p2: "We will respond as soon as possible after receiving your email.",
+        s10_title: "10. Applicable Law",
+        s10_p1: "This privacy policy is governed by the laws of the People's Republic of China. If there is any inconsistency between the Chinese version and other language versions of this privacy policy, the Chinese version shall prevail.",
+        footer: "All features of this App are completed locally on the device. Protecting your privacy is our top priority."
+    },
+    ja: {
+        pageTitle: "プライバシーポリシー",
+        updateDate: "最終更新日：2026年5月8日",
+        intro: "<strong>「マルチタスクタイマー」</strong>（以下「本アプリ」）をご利用いただきありがとうございます。私たちはプライバシーの重要性を十分に認識しており、本プライバシーポリシーでは本アプリがお客様の情報をどのように扱うかを明確かつ透明に説明します。",
+        highlight: "🔒 基本方針：本アプリは、お客様の個人データを収集、アップロード、共有することはありません。",
+        s1_title: "1. 収集する情報",
+        s1_p1: "<strong>当社は一切情報を収集しません。</strong>",
+        s1_p2: "本アプリにはアカウント登録システム、ユーザーログイン機能はなく、第三者の統計や分析SDKも使用していません。本アプリをご利用いただく際に、個人情報を提供いただく必要はありません。",
+        s2_title: "2. 権限の使用について",
+        s2_p1: "本アプリは、アプリのコア機能の実現のために<strong>のみ</strong>、デバイスの一部の権限にアクセスする必要がある場合があります。",
+        s2_p2: "<strong>当社は以下のことを行いません：</strong>",
+        s2_li1: "お客様のデータをサーバーにアップロードすること",
+        s2_li2: "お客様のデータを第三者と共有すること",
+        s2_li3: "コア機能以外の目的でデータを使用すること",
+        s2_p3: "すべてのデータ処理はお客様のデバイス上でローカルに実行されます。",
+        s3_title: "3. データの保存",
+        s3_p1: "本アプリで生成されたデータは<strong>お客様のデバイスのローカルストレージにのみ保存されます</strong>。",
+        s3_p2: "本アプリは、お客様のデバイス上のその他のファイルの読み取り、スキャン、アップロード、分析を行うことはありません。",
+        s4_title: "4. 第三者サービス",
+        s4_p1: "<strong>本アプリは第三者サービスを一切使用していません。</strong>",
+        s4_p2: "具体的には、本アプリには以下が含まれていません：",
+        s4_li1: "第三者広告SDK",
+        s4_li2: "第三者データ分析ツール",
+        s4_li3: "第三者クラッシュレポートツール",
+        s4_li4: "第三者ソーシャル共有SDK",
+        s4_li5: "いかなる形式のユーザー行動追跡",
+        s5_title: "5. データの保存とセキュリティ",
+        s5_p1: "本アプリはユーザーデータを収集しないため、以下が保証されます：",
+        s5_li1: "ユーザーデータのサーバー保存は存在しません",
+        s5_li2: "データ転送中のセキュリティリスクは存在しません",
+        s5_li3: "データ漏洩の可能性は存在しません",
+        s5_p2: "お客様のデータはデバイスにローカルに保存され、そのセキュリティはお使いのデバイスのシステムによって保護されます。",
+        s6_title: "6. 子どものプライバシー",
+        s6_p1: "本アプリは13歳未満の子どもを対象としていません。本アプリは個人情報を収集しないため、ユーザーの年齢を知る方法はありません。保護者や監視者がお子様が本アプリを使用していることに気づいた場合、データ収集について心配する必要はありません。本アプリはデータを収集しないためです。",
+        s7_title: "7. お客様の権利",
+        s7_p1: "本アプリは個人データを収集しないため、お客様は当然完全なプライバシー保護を享受できます：",
+        s7_li1: "データへのアクセスやエクスポートをリクエストする必要はありません（データが収集されていないため）",
+        s7_li2: "データの削除をリクエストする必要はありません（データが保存されていないため）",
+        s7_li3: "アプリをアンインストールすると、アプリ内のすべてのデータがクリアされます",
+        s8_title: "8. プライバシーポリシーの変更",
+        s8_p1: "本プライバシーポリシーに変更がある場合、このページで更新します。本アプリはユーザーデータを収集しないため、メールやその他の手段で通知することはできません。定期的にこのページをご確認いただくことをお勧めします。",
+        s9_title: "9. お問い合わせ",
+        s9_p1: "本プライバシーポリシーについてご質問、ご意見、ご提案がある場合は、以下の方法でお問い合わせください：",
+        s9_li1: "📧 メール：<strong>3314967083@qq.com</strong>",
+        s9_p2: "メール受信後、できるだけ早く返信いたします。",
+        s10_title: "10. 準拠法",
+        s10_p1: "本プライバシーポリシーは中華人民共和国の法律に準拠します。本プライバシーポリシーの中国語版と他の言語版に不一致がある場合、中国語版が優先されます。",
+        footer: "本アプリのすべての機能はデバイス上でローカルに実行されます。お客様のプライバシーを保護することが私たちの最優先事項です。"
+    },
+    ko: {
+        pageTitle: "개인정보처리방침",
+        updateDate: "최종 업데이트: 2026년 5월 8일",
+        intro: "<strong>다중 작업 타이머</strong>(이하 \"본 앱\")를 이용해 주셔서 감사합니다. 당사는 귀하의 개인정보를 중요하게 생각하며, 본 개인정보처리방침에서는 본 앱이 귀하의 정보를 어떻게 처리하는지를 명확하고 투명하게 설명합니다.",
+        highlight: "🔒 핵심 약속: 본 앱은 귀하의 개인정보를 수집, 업로드, 공유하지 않습니다.",
+        s1_title: "1. 수집하는 정보",
+        s1_p1: "<strong>당사는 어떠한 정보도 수집하지 않습니다.</strong>",
+        s1_p2: "본 앱에는 계정 등록 시스템, 사용자 로그인 기능이 없으며, 타사 통계 또는 분석 SDK를 사용하지 않습니다. 본 앱을 사용하실 때 개인정보를 제공할 필요가 없습니다.",
+        s2_title: "2. 권한 사용 안내",
+        s2_p1: "본 앱은 앱의 핵심 기능을 구현하기 위해 <strong>필요한 경우에만</strong> 기기의 일부 권한에 접근할 수 있습니다.",
+        s2_p2: "<strong>당사는 다음을 하지 않습니다:</strong>",
+        s2_li1: "귀하의 데이터를 서버에 업로드하지 않습니다",
+        s2_li2: "귀하의 데이터를 제3자와 공유하지 않습니다",
+        s2_li3: "핵심 기능 외의 목적으로 데이터를 사용하지 않습니다",
+        s2_p3: "모든 데이터 처리는 귀하의 기기에서 로컬로 수행됩니다.",
+        s3_title: "3. 데이터 저장",
+        s3_p1: "본 앱에서 생성된 데이터는 <strong>귀하의 기기 로컬 저장소에のみ 저장됩니다</strong>.",
+        s3_p2: "본 앱은 귀하의 기기에 있는 다른 파일을 읽거나, 스캔하거나, 업로드하거나, 분석하지 않습니다.",
+        s4_title: "4. 타사 서비스",
+        s4_p1: "<strong>본 앱은 타사 서비스를 사용하지 않습니다.</strong>",
+        s4_p2: "구체적으로 본 앱에는 다음이 포함되지 않습니다:",
+        s4_li1: "타사 광고 SDK",
+        s4_li2: "타사 데이터 분석 도구",
+        s4_li3: "타사 크래시 보고 도구",
+        s4_li4: "타사 소셜 공유 SDK",
+        s4_li5: "어떠한 형태의 사용자 행동 추적",
+        s5_title: "5. 데이터 저장 및 보안",
+        s5_p1: "본 앱은 사용자 데이터를 수집하지 않으므로:",
+        s5_li1: "사용자 데이터의 서버 저장소가 존재하지 않습니다",
+        s5_li2: "데이터 전송 중 보안 위험이 존재하지 않습니다",
+        s5_li3: "데이터 유출 가능성이 존재하지 않습니다",
+        s5_p2: "귀하의 데이터는 기기에 로컬로 저장되며, 그 보안은 귀하의 기기 시스템에 의해 보호됩니다.",
+        s6_title: "6. 아동 개인정보 보호",
+        s6_p1: "본 앱은 13세 미만의 아동을 대상으로 하지 않습니다. 본 앱은 개인정보를 수집하지 않으므로 사용자의 나이를 알 수 있는 방법이 없습니다. 보호자 또는 감독자가 아동이 본 앱을 사용하고 있음을 발견하더라도 데이터 수집에 대해 걱정할 필요가 없습니다. 본 앱은 데이터를 수집하지 않기 때문입니다.",
+        s7_title: "7. 귀하의 권리",
+        s7_p1: "본 앱은 개인정보를 수집하지 않으므로, 귀하는 당연히 완전한 개인정보 보호를享受할 수 있습니다:",
+        s7_li1: "데이터 접근 또는 내보내기를 요청할 필요가 없습니다 (데이터가 수집되지 않으므로)",
+        s7_li2: "데이터 삭제를 요청할 필요가 없습니다 (데이터가 저장되지 않으므로)",
+        s7_li3: "앱을 제거하면 앱 내의 모든 데이터가 삭제됩니다",
+        s8_title: "8. 개인정보처리방침 변경",
+        s8_p1: "본 개인정보처리방침에 변경이 있는 경우 이 페이지에서 업데이트합니다. 본 앱은 사용자 데이터를 수집하지 않으므로 이메일 또는 기타 수단으로 알려드릴 수 없습니다. 이 페이지를 정기적으로 확인하시기 바랍니다.",
+        s9_title: "9. 문의하기",
+        s9_p1: "본 개인정보처리방침에 대해 질문, 의견 또는 제안이 있는 경우 다음을 통해 문의해 주세요:",
+        s9_li1: "📧 이메일: <strong>3314967083@qq.com</strong>",
+        s9_p2: "이메일을 받은 후 최대한 빨리 회신드리겠습니다.",
+        s10_title: "10. 준거법",
+        s10_p1: "본 개인정보처리방침은 중화인민공화국 법률의 적용을 받습니다. 본 개인정보처리방침의 중국어 버전과 다른 언어 버전 간에 불일치가 있는 경우 중국어 버전을 우선으로 합니다.",
+        footer: "본 앱의 모든 기능은 기기에서 로컬로 처리됩니다. 귀하의 개인정보를 보호하는 것이 우리의 최우선 원칙입니다."
+    },
+    es: {
+        pageTitle: "Política de Privacidad",
+        updateDate: "Última actualización: 8 de mayo de 2026",
+        intro: "Gracias por usar <strong>Multi-task Timer</strong> (en adelante, \"esta aplicación\"). Valoramos profundamente su privacidad, y esta política de privacidad explica de manera clara y transparente cómo esta aplicación maneja su información.",
+        highlight: "🔒 Compromiso principal: Esta aplicación no recopila, carga ni comparte ninguno de sus datos personales.",
+        s1_title: "1. Qué información recopilamos",
+        s1_p1: "<strong>No recopilamos ninguna información.</strong>",
+        s1_p2: "Esta aplicación no tiene sistema de registro de cuentas, no tiene función de inicio de sesión de usuarios y no utiliza SDK de estadísticas o análisis de terceros. No necesita proporcionar ninguna información personal al usar esta aplicación.",
+        s2_title: "2. Uso de permisos",
+        s2_p1: "Esta aplicación puede necesitar acceso a ciertos permisos en su dispositivo, <strong>únicamente para</strong> implementar las funciones principales de la aplicación.",
+        s2_p2: "<strong>No haremos:</strong>",
+        s2_li1: "Subir sus datos a ningún servidor",
+        s2_li2: "Compartir sus datos con ningún tercero",
+        s2_li3: "Usar sus datos para ningún propósito más allá de las funciones principales",
+        s2_p3: "Todo el procesamiento de datos se realiza localmente en su dispositivo.",
+        s3_title: "3. Almacenamiento de datos",
+        s3_p1: "Los datos generados por esta aplicación se <strong>almacenan únicamente en el almacenamiento local de su dispositivo</strong>.",
+        s3_p2: "Esta aplicación no leerá, escaneará, subirá ni analizará ningún otro archivo en su dispositivo.",
+        s4_title: "4. Servicios de terceros",
+        s4_p1: "<strong>Esta aplicación no utiliza ningún servicio de terceros.</strong>",
+        s4_p2: "Específicamente, esta aplicación no contiene:",
+        s4_li1: "SDK de publicidad de terceros",
+        s4_li2: "Herramientas de análisis de datos de terceros",
+        s4_li3: "Herramientas de informes de fallos de terceros",
+        s4_li4: "SDK de redes sociales de terceros",
+        s4_li5: "Cualquier forma de seguimiento del comportamiento del usuario",
+        s5_title: "5. Almacenamiento y seguridad de datos",
+        s5_p1: "Dado que esta aplicación no recopila datos de usuario:",
+        s5_li1: "No existe almacenamiento de datos de usuario en servidores",
+        s5_li2: "No existe riesgo de seguridad durante la transmisión de datos",
+        s5_li3: "No existe posibilidad de violación de datos",
+        s5_p2: "Sus datos se almacenan localmente en su dispositivo, y su seguridad está protegida por el sistema de su dispositivo.",
+        s6_title: "6. Privacidad de los niños",
+        s6_p1: "Esta aplicación no está diseñada para niños menores de 13 años. Dado que esta aplicación no recopila información personal, no tenemos forma de conocer la edad de los usuarios. Si los padres o tutores发现 niños usando esta aplicación, no hay necesidad de preocuparse por la recopilación de datos, ya que esta aplicación no recopila ningún dato.",
+        s7_title: "7. Sus derechos",
+        s7_p1: "Dado que esta aplicación no recopila datos personales, usted naturalmente disfruta de protección completa de la privacidad:",
+        s7_li1: "No es necesario solicitar acceso o exportación de datos (porque no se recopilan datos)",
+        s7_li2: "No es necesario solicitar la eliminación de datos (porque no se almacenan datos)",
+        s7_li3: "Desinstalar la aplicación borrará todos los datos dentro de la aplicación",
+        s8_title: "8. Cambios en la Política de Privacidad",
+        s8_p1: "Si hay algún cambio en esta política de privacidad, lo actualizaremos en esta página. Dado que esta aplicación no recopila datos de usuario, no podemos notificarle por correo electrónico u otros medios. Le recomendamos que revise esta página regularmente.",
+        s9_title: "9. Contáctenos",
+        s9_p1: "Si tiene alguna pregunta, comentario o sugerencia sobre esta política de privacidad, contáctenos a través de:",
+        s9_li1: "📧 Correo electrónico: <strong>3314967083@qq.com</strong>",
+        s9_p2: "Responderemos lo antes posible después de recibir su correo electrónico.",
+        s10_title: "10. Ley aplicable",
+        s10_p1: "Esta política de privacidad se rige por las leyes de la República Popular China. Si hay alguna inconsistencia entre la versión en chino y otras versiones lingüísticas de esta política de privacidad, prevalecerá la versión en chino.",
+        footer: "Todas las funciones de esta aplicación se completan localmente en el dispositivo. Proteger su privacidad es nuestra máxima prioridad."
+    },
+    de: {
+        pageTitle: "Datenschutzrichtlinie",
+        updateDate: "Letzte Aktualisierung: 8. Mai 2026",
+        intro: "Vielen Dank, dass Sie <strong>Multi-task Timer</strong> (im Folgenden \"diese App\") verwenden. Wir schätzen Ihre Privatsphäre sehr und diese Datenschutzrichtlinie erklärt klar und transparent, wie diese App mit Ihren Informationen umgeht.",
+        highlight: "🔒 Kernversprechen: Diese App sammelt, lädt oder teilt keine Ihrer persönlichen Daten.",
+        s1_title: "1. Welche Informationen wir sammeln",
+        s1_p1: "<strong>Wir sammeln keinerlei Informationen.</strong>",
+        s1_p2: "Diese App hat kein Konto-Registrierungssystem, keine Benutzer-Anmeldefunktion und verwendet keine Statistik- oder Analyse-SDKs von Drittanbietern. Sie müssen beim Verwenden dieser App keine persönlichen Informationen angeben.",
+        s2_title: "2. Berechtigungsverwendung",
+        s2_p1: "Diese App möglicherweise auf bestimmte Berechtigungen auf Ihrem Gerät zugreifen, <strong>ausschließlich zur</strong> Implementierung der Kernfunktionen der App.",
+        s2_p2: "<strong>Wir werden nicht:</strong>",
+        s2_li1: "Ihre Daten auf einen Server hochladen",
+        s2_li2: "Ihre Daten mit Dritten teilen",
+        s2_li3: "Ihre Daten für Zwecke außerhalb der Kernfunktionen verwenden",
+        s2_p3: "Die gesamte Datenverarbeitung erfolgt lokal auf Ihrem Gerät.",
+        s3_title: "3. Datenspeicherung",
+        s3_p1: "Von dieser App generierte Daten werden <strong>nur im lokalen Speicher Ihres Geräts gespeichert</strong>.",
+        s3_p2: "Diese App wird keine anderen Dateien auf Ihrem Gerät lesen, scannen, hochladen oder analysieren.",
+        s4_title: "4. Drittanbieter-Dienste",
+        s4_p1: "<strong>Diese App verwendet keine Drittanbieter-Dienste.</strong>",
+        s4_p2: "Insbesondere enthält diese App nicht:",
+        s4_li1: "Werbung-SDKs von Drittanbietern",
+        s4_li2: "Datenanalyse-Tools von Drittanbietern",
+        s4_li3: "Absturzberichts-Tools von Drittanbietern",
+        s4_li4: "Social-Sharing-SDKs von Drittanbietern",
+        s4_li5: "Jegliche Form der Benutzerverhaltensverfolgung",
+        s5_title: "5. Datenspeicherung und Sicherheit",
+        s5_p1: "Da diese App keine Benutzerdaten sammelt:",
+        s5_li1: "Es gibt keine Serverspeicherung von Benutzerdaten",
+        s5_li2: "Es gibt kein Sicherheitsrisiko bei der Datenübertragung",
+        s5_li3: "Es gibt keine Möglichkeit eines Datenlecks",
+        s5_p2: "Ihre Daten werden lokal auf Ihrem Gerät gespeichert, und ihre Sicherheit wird durch das System Ihres Geräts geschützt.",
+        s6_title: "6. Kinderdatenschutz",
+        s6_p1: "Diese App ist nicht für Kinder unter 13 Jahren konzipiert. Da diese App keine persönlichen Informationen sammelt, haben wir keine Möglichkeit, das Alter der Benutzer zu erfahren. Wenn Eltern oder Vormünder feststellen, dass Kinder diese App verwenden, gibt es keinen Grund zur Sorge um die Datensammlung, da diese App keine Daten sammelt.",
+        s7_title: "7. Ihre Rechte",
+        s7_p1: "Da diese App keine persönlichen Daten sammelt, genießen Sie natürlich vollständigen Datenschutz:",
+        s7_li1: "Kein Bedarf, Datenzugang oder -export anzufordern (da keine Daten gesammelt werden)",
+        s7_li2: "Kein Bedarf, Datenlöschung anzufordern (da keine Daten gespeichert werden)",
+        s7_li3: "Das Deinstallieren der App löscht alle Daten innerhalb der App",
+        s8_title: "8. Änderungen an der Datenschutzrichtlinie",
+        s8_p1: "Wenn es Änderungen an dieser Datenschutzrichtlinie gibt, werden wir sie auf dieser Seite aktualisieren. Da diese App keine Benutzerdaten sammelt, können wir Sie nicht per E-Mail oder anderen Mitteln benachrichtigen. Wir empfehlen Ihnen, diese Seite regelmäßig zu überprüfen.",
+        s9_title: "9. Kontaktieren Sie uns",
+        s9_p1: "Wenn Sie Fragen, Kommentare oder Vorschläge zu dieser Datenschutzrichtlinie haben, kontaktieren Sie uns bitte über:",
+        s9_li1: "📧 E-Mail: <strong>3314967083@qq.com</strong>",
+        s9_p2: "Wir werden uns so schnell wie möglich nach Erhalt Ihrer E-Mail bei Ihnen melden.",
+        s10_title: "10. Anwendbares Recht",
+        s10_p1: "Diese Datenschutzrichtlinie unterliegt den Gesetzen der Volksrepublik China. Im Falle von Unstimmigkeiten zwischen der chinesischen Version und anderen Sprachversionen dieser Datenschutzrichtlinie gilt die chinesische Version.",
+        footer: "Alle Funktionen dieser App werden lokal auf dem Gerät abgeschlossen. Der Schutz Ihrer Privatsphäre ist unsere oberste Priorität."
+    },
+    fr: {
+        pageTitle: "Politique de confidentialité",
+        updateDate: "Dernière mise à jour : 8 mai 2026",
+        intro: "Merci d'utiliser <strong>Multi-task Timer</strong> (ci-après \"cette application\"). Nous accordons une grande importance à votre vie privée, et cette politique de confidentialité explique de manière claire et transparente comment cette application traite vos informations.",
+        highlight: "🔒 Engagement principal : Cette application ne collecte, ne télécharge ni ne partage aucune de vos données personnelles.",
+        s1_title: "1. Quelles informations nous collectons",
+        s1_p1: "<strong>Nous ne collectons aucune information.</strong>",
+        s1_p2: "Cette application ne dispose pas de système d'inscription de compte, pas de fonctionnalité de connexion utilisateur et n'utilise aucun SDK de statistiques ou d'analyse tiers. Vous n'avez pas besoin de fournir d'informations personnelles lors de l'utilisation de cette application.",
+        s2_title: "2. Utilisation des autorisations",
+        s2_p1: "Cette application peut avoir besoin d'accéder à certaines autorisations sur votre appareil, <strong>uniquement pour</strong> implémenter les fonctionnalités principales de l'application.",
+        s2_p2: "<strong>Nous ne ferons pas :</strong>",
+        s2_li1: "Téléverser vos données sur un serveur",
+        s2_li2: "Partager vos données avec un tiers",
+        s2_li3: "Utiliser vos données à des fins autres que les fonctionnalités principales",
+        s2_p3: "Tout le traitement des données est effectué localement sur votre appareil.",
+        s3_title: "3. Stockage des données",
+        s3_p1: "Les données générées par cette application sont <strong>stockées uniquement dans le stockage local de votre appareil</strong>.",
+        s3_p2: "Cette application ne lira, ne scannera, ne téléversera ni n'analysera aucun autre fichier sur votre appareil.",
+        s4_title: "4. Services tiers",
+        s4_p1: "<strong>Cette application n'utilise aucun service tiers.</strong>",
+        s4_p2: "Plus précisément, cette application ne contient pas :",
+        s4_li1: "SDK de publicité tiers",
+        s4_li2: "Outils d'analyse de données tiers",
+        s4_li3: "Outils de rapport de plantage tiers",
+        s4_li4: "SDK de partage social tiers",
+        s4_li5: "Toute forme de suivi du comportement de l'utilisateur",
+        s5_title: "5. Stockage et sécurité des données",
+        s5_p1: "Étant donné que cette application ne collecte aucune donnée utilisateur :",
+        s5_li1: "Il n'y a pas de stockage de données utilisateur sur des serveurs",
+        s5_li2: "Il n'y a pas de risque de sécurité lors de la transmission des données",
+        s5_li3: "Il n'y a aucune possibilité de fuite de données",
+        s5_p2: "Vos données sont stockées localement sur votre appareil, et leur sécurité est protégée par le système de votre appareil.",
+        s6_title: "6. Vie privée des enfants",
+        s6_p1: "Cette application n'est pas conçue pour les enfants de moins de 13 ans. Étant donné que cette application ne collecte aucune information personnelle, nous n'avons aucun moyen de connaître l'âge des utilisateurs. Si des parents ou tuteurs constatent que des enfants utilisent cette application, il n'y a pas lieu de s'inquiéter de la collecte de données, car cette application ne collecte aucune donnée.",
+        s7_title: "7. Vos droits",
+        s7_p1: "Étant donné que cette application ne collecte aucune donnée personnelle, vous bénéficiez naturellement d'une protection complète de la vie privée :",
+        s7_li1: "Pas besoin de demander l'accès ou l'exportation des données (car aucune donnée n'est collectée)",
+        s7_li2: "Pas besoin de demander la suppression des données (car aucune donnée n'est stockée)",
+        s7_li3: "La désinstallation de l'application effacera toutes les données à l'intérieur de l'application",
+        s8_title: "8. Modifications de la politique de confidentialité",
+        s8_p1: "S'il y a des modifications à cette politique de confidentialité, nous les mettrons à jour sur cette page. Étant donné que cette application ne collecte pas de données utilisateur, nous ne pouvons pas vous notifier par e-mail ou autre moyen. Nous vous recommandons de consulter régulièrement cette page.",
+        s9_title: "9. Nous contacter",
+        s9_p1: "Si vous avez des questions, commentaires ou suggestions concernant cette politique de confidentialité, veuillez nous contacter via :",
+        s9_li1: "📧 E-mail : <strong>3314967083@qq.com</strong>",
+        s9_p2: "Nous vous répondrons dans les plus brefs délais après réception de votre e-mail.",
+        s10_title: "10. Droit applicable",
+        s10_p1: "Cette politique de confidentialité est régie par les lois de la République populaire de Chine. En cas d'incohérence entre la version chinoise et les autres versions linguistiques de cette politique de confidentialité, la version chinoise prévaut.",
+        footer: "Toutes les fonctionnalités de cette application sont complétées localement sur le dispositif. Protéger votre vie privée est notre priorité absolue."
+    },
+    ar: {
+        pageTitle: "سياسة الخصوصية",
+        updateDate: "آخر تحديث: 8 مايو 2026",
+        intro: "شكرًا لاستخدام <strong>多任务计时器</strong> (يشار إليه فيما يلي بـ \"هذا التطبيق\"). نقدر خصوصيتك بعمق، وتوضح سياسة الخصوصية هذه بشكل شفاف وواضح كيف يتعامل هذا التطبيق مع معلوماتك.",
+        highlight: "🔒 الالتزام الأساسي: لا يجمع هذا التطبيق أو يرفع أو يشارك أيًا من بياناتك الشخصية.",
+        s1_title: "1. المعلومات التي نجمعها",
+        s1_p1: "<strong>لا نجمع أي معلومات.</strong>",
+        s1_p2: "لا يحتوي هذا التطبيق على نظام تسجيل حسابات، ولا يوجد ميزة تسجيل دخول للمستخدمين، ولا يستخدم أي أدوات إحصائية أو تحليلية تابعة لجهات خارجية. لا تحتاج إلى تقديم أي معلومات شخصية عند استخدام هذا التطبيق.",
+        s2_title: "2. استخدام الأذونات",
+        s2_p1: "قد يحتاج هذا التطبيق إلى الوصول إلى أذونات معينة على جهازك، <strong>فقط من أجل</strong> تنفيذ الميزات الأساسية للتطبيق.",
+        s2_p2: "<strong>لن نقوم بـ:</strong>",
+        s2_li1: "تحميل بياناتك إلى أي خادم",
+        s2_li2: "مشاركة بياناتك مع أي طرف ثالث",
+        s2_li3: "استخدام بياناتك لأي غرض يتجاوز الميزات الأساسية",
+        s2_p3: "يتم معالجة جميع البيانات محليًا على جهازك.",
+        s3_title: "3. تخزين البيانات",
+        s3_p1: "يتم <strong>تخزين البيانات التي ينشئها هذا التطبيق فقط في التخزين المحلي لجهازك</strong>.",
+        s3_p2: "لن يقوم هذا التطبيق بقراءة أو مسح أو تحميل أو تحليل أي ملفات أخرى على جهازك.",
+        s4_title: "4. خدمات الجهات الخارجية",
+        s4_p1: "<strong>لا يستخدم هذا التطبيق أي خدمات تابعة لجهات خارجية.</strong>",
+        s4_p2: "على وجه التحديد، لا يحتوي هذا التطبيق على:",
+        s4_li1: "أدوات إعلانات تابعة لجهات خارجية",
+        s4_li2: "أدوات تحليل بيانات تابعة لجهات خارجية",
+        s4_li3: "أدوات تقارير الأعطال التابعة لجهات خارجية",
+        s4_li4: "أدوات مشاركة الوسائط الاجتماعية التابعة لجهات خارجية",
+        s4_li5: "أي شكل من أشكال تتبع سلوك المستخدم",
+        s5_title: "5. تخزين البيانات والأمان",
+        s5_p1: "نظرًا لأن هذا التطبيق لا يجمع أي بيانات مستخدم:",
+        s5_li1: "لا يوجد تخزين لبيانات المستخدم على الخوادم",
+        s5_li2: "لا يوجد خطر أمني أثناء نقل البيانات",
+        s5_li3: "لا يوجد احتمال لخرق البيانات",
+        s5_p2: "يتم تخزين بياناتك محليًا على جهازك، ويتم حماية أمانها بواسطة نظام جهازك.",
+        s6_title: "6. خصوصية الأطفال",
+        s6_p1: "لم يتم تصميم هذا التطبيق للأطفال دون سن 13 عامًا. نظرًا لأن هذا التطبيق لا يجمع أي معلومات شخصية، فلا توجد لدينا طريقة لمعرفة أعمار المستخدمين. إذا اكتشف الآباء أو الأوصياء أن الأطفال يستخدمون هذا التطبيق، فلا داعي للقلق بشأن جمع البيانات، لأن هذا التطبيق لا يجمع أي بيانات.",
+        s7_title: "7. حقوقك",
+        s7_p1: "نظرًا لأن هذا التطبيق لا يجمع أي بيانات شخصية، فإنك تتمتع بحماية كاملة للخصوصية:",
+        s7_li1: "لا حاجة لطلب الوصول إلى البيانات أو تصديرها (لأنه لا يتم جمع أي بيانات)",
+        s7_li2: "لا حاجة لطلب حذف البيانات (لأنه لا يتم تخزين أي بيانات)",
+        s7_li3: "سيؤدي إلغاء تثبيت التطبيق إلى مسح جميع البيانات داخل التطبيق",
+        s8_title: "8. التغييرات على سياسة الخصوصية",
+        s8_p1: "إذا كانت هناك أي تغييرات في سياسة الخصوصية هذه، فسنقوم بتحديثها في هذه الصفحة. نظرًا لأن هذا التطبيق لا يجمع بيانات المستخدم، فلا يمكننا إخطارك عبر البريد الإلكتروني أو وسائل أخرى. نوصيك بمراجعة هذه الصفحة بانتظام.",
+        s9_title: "9. اتصل بنا",
+        s9_p1: "إذا كانت لديك أي أسئلة أو تعليقات أو اقتراحات بخصوص سياسة الخصوصية هذه، يرجى الاتصال بنا عبر:",
+        s9_li1: "📧 البريد الإلكتروني: <strong>3314967083@qq.com</strong>",
+        s9_p2: "سنرد في أقرب وقت ممكن بعد استلام بريدك الإلكتروني.",
+        s10_title: "10. القانون المطبق",
+        s10_p1: "تخضع سياسة الخصوصية هذه لقوانين جمهورية الصين الشعبية. في حالة وجود أي تناقض بين النسخة الصينية والنسخ اللغوية الأخرى من سياسة الخصوصية هذه، فإن النسخة الصينية هي المعمول بها.",
+        footer: "يتم تنفيذ جميع ميزات هذا التطبيق محليًا على الجهاز. حماية خصوصيتك هي أولويتنا القصوى."
+    }
+};
+
+const langMap = {
+    'zh': 'zh', 'zh-CN': 'zh', 'zh-Hans': 'zh',
+    'en': 'en', 'en-US': 'en', 'en-GB': 'en',
+    'ja': 'ja',
+    'ko': 'ko',
+    'es': 'es', 'es-ES': 'es',
+    'de': 'de', 'de-DE': 'de',
+    'fr': 'fr', 'fr-FR': 'fr',
+    'ar': 'ar', 'ar-SA': 'ar'
+};
+
+function getSystemLang() {
+    const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    return langMap[browserLang] || langMap[browserLang.split('-')[0]] || 'en';
+}
+
+function renderContent(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    document.getElementById('page-title').textContent = t.pageTitle;
+    document.getElementById('update-date').textContent = t.updateDate;
+
+    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+
+    const content = `
+        <p>${t.intro}</p>
+        <div class="highlight-box">
+            <p>${t.highlight}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s1_title}</h3>
+            <p>${t.s1_p1}</p>
+            <p>${t.s1_p2}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s2_title}</h3>
+            <p>${t.s2_p1}</p>
+            <p>${t.s2_p2}</p>
+            <ul>
+                <li>${t.s2_li1}</li>
+                <li>${t.s2_li2}</li>
+                <li>${t.s2_li3}</li>
+            </ul>
+            <p>${t.s2_p3}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s3_title}</h3>
+            <p>${t.s3_p1}</p>
+            <p>${t.s3_p2}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s4_title}</h3>
+            <p>${t.s4_p1}</p>
+            <p>${t.s4_p2}</p>
+            <ul>
+                <li>${t.s4_li1}</li>
+                <li>${t.s4_li2}</li>
+                <li>${t.s4_li3}</li>
+                <li>${t.s4_li4}</li>
+                <li>${t.s4_li5}</li>
+            </ul>
+        </div>
+        <div class="section-card">
+            <h3>${t.s5_title}</h3>
+            <p>${t.s5_p1}</p>
+            <ul>
+                <li>${t.s5_li1}</li>
+                <li>${t.s5_li2}</li>
+                <li>${t.s5_li3}</li>
+            </ul>
+            <p>${t.s5_p2}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s6_title}</h3>
+            <p>${t.s6_p1}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s7_title}</h3>
+            <p>${t.s7_p1}</p>
+            <ul>
+                <li>${t.s7_li1}</li>
+                <li>${t.s7_li2}</li>
+                <li>${t.s7_li3}</li>
+            </ul>
+        </div>
+        <div class="section-card">
+            <h3>${t.s8_title}</h3>
+            <p>${t.s8_p1}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s9_title}</h3>
+            <p>${t.s9_p1}</p>
+            <ul>
+                <li>${t.s9_li1}</li>
+            </ul>
+            <p>${t.s9_p2}</p>
+        </div>
+        <div class="section-card">
+            <h3>${t.s10_title}</h3>
+            <p>${t.s10_p1}</p>
+        </div>
+    `;
+    document.getElementById('content').innerHTML = content;
+    document.getElementById('footer-note').textContent = t.footer;
+
+    document.querySelectorAll('#lang-select option').forEach(opt => {
+        opt.selected = opt.value === lang;
+    });
+}
+
+function switchLang(lang) {
+    renderContent(lang);
+}
+
+const defaultLang = getSystemLang();
+renderContent(defaultLang);
+</script>
 </body>
 </html>
